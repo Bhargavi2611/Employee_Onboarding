@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onboarding Form</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .screen {
+      display: none;
+      height: 100vh;
+      background-color: #d3c3f3;
+      padding: 20px;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .navigation {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    input, button, select, label {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    .start-button, .upload-button, .nav-button {
+      background-color: #2f004f;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .nav-button {
+      width: 48%;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: -10px;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 600px) {
+      input, button, select, label {
+        font-size: 1em;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <form id="onboardingForm">
+    <!-- Screen 1 -->
+    <div class="screen active" id="screen1">
+      <h2><center>ICONIC DREAM FOCUS PRIVATE LIMITED</h2>
+      <h3><center>WELCOME</h3>
+      <img src="https://i.ibb.co/5X9nqZvd/Whats-App-Image-2025-04-16-at-16-19-00-0630631c-removebg-preview.png"
+           alt="Company Logo"
+           style="display: block; margin: 20px auto; max-width: 200px;">
+      <button class="start-button" type="button" onclick="nextScreen()">START</button>
+    </div>
+
+    <!-- Screen 2 -->
+    <div class="screen" id="screen2">
+      <h3><center>Personal Details</h3>
+      <input type="text" name="firstName" placeholder="First Name" required>
+      <input type="text" name="lastName" placeholder="Last Name" required>
+      <input type="date" name="dob" placeholder="DOB" required>
+      <input type="tel" name="contact" placeholder="Contact Number" required pattern="\d{10}" title="Enter a valid 10-digit phone number">
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="text" name="address" placeholder="Current Address" required>
+      <div class="navigation">
+        <button type="button" class="nav-button" onclick="prevScreen()">Previous</button>
+        <button type="button" class="nav-button" onclick="nextScreen()">Next</button>
+      </div>
+    </div>
+
+    <!-- Screen 3 -->
+    <div class="screen" id="screen3">
+      <h3><center>Bank Account Details</h3>
+      <input type="text" name="accountHolder" placeholder="Account Holder Name" required>
+      <input type="text" name="bankName" placeholder="Bank Name" required>
+      <input type="text" name="accountNumber" placeholder="Account Number" required pattern="\d+" title="Enter a valid account number">
+      <input type="text" name="ifsc" placeholder="IFSC Code" required
+             pattern="[A-Z]{4}0[A-Z0-9]{6}"
+             title="Enter a valid IFSC code"
+             oninput="this.value = this.value.toUpperCase()">
+      <div class="navigation">
+        <button type="button" class="nav-button" onclick="prevScreen()">Previous</button>
+        <button type="button" class="nav-button" onclick="nextScreen()">Next</button>
+      </div>
+    </div>
+
+    <!-- Screen ID Proofs -->
+    <div class="screen" id="screenIDProofs">
+      <h3><center>ID PROOFS</h3>
+
+      <label>PAN Number:</label>
+      <input type="text" name="panNumber" placeholder="Enter PAN Number" required>
+      <input type="file" name="panPhoto" class="upload-button" accept="image/*" required>
+
+      <label>Aadhar Number:</label>
+      <input type="text" name="aadharNumber" placeholder="Enter Aadhar Number" required>
+      <input type="file" name="aadharPhoto" class="upload-button" accept="image/*" required>
+
+      <label>Passport Number:</label>
+      <input type="text" name="passportNumber" placeholder="Enter Passport Number" required>
+      <input type="file" name="passportPhoto" class="upload-button" accept="image/*" required>
+
+      <div class="navigation">
+        <button type="button" class="nav-button" onclick="prevScreen()">Previous</button>
+        <button type="button" class="nav-button" onclick="nextScreen()">Next</button>
+      </div>
+    </div>
+
+    <!-- Screen 4 -->
+    <div class="screen" id="screen4">
+      <h3><center>Required Documents</h3>
+      <label>Resume: <input type="file" name="resume" class="upload-button" required></label>
+      <label>Education Certificates: <input type="file" name="certificates" class="upload-button" required></label>
+      <label>Passport Size Photo: <input type="file" name="photo" class="upload-button" required></label>
+      <div class="navigation">
+        <button type="button" class="nav-button" onclick="prevScreen()">Previous</button>
+        <button type="button" class="nav-button" onclick="nextScreen()">Next</button>
+      </div>
+    </div>
+
+    <!-- Screen 5 -->
+    <div class="screen" id="screen5">
+      <h3><center>Acknowledgements</h3>
+      <label><input type="checkbox" name="confirmInfo" required> I confirm the information above is true</label>
+      <label><input type="checkbox" name="acceptOffer" required> I have accepted the offer letter</label>
+      <label><input type="checkbox" name="agreeTerms" required> I agree to company terms and policies</label>
+      <div class="navigation">
+        <button type="button" class="nav-button" onclick="prevScreen()">Previous</button>
+        <button type="submit" class="nav-button">Submit</button>
+      </div>
+    </div>
+
+    <!-- Screen 6 -->
+    <div class="screen" id="screen6">
+      <h3 style="text-align:center;">Thank you!</h3>
+    </div>
+  </form>
+
+  <script>
+    let current = 1;
+    const screens = document.querySelectorAll('.screen');
+
+    function showScreen(num) {
+      screens.forEach((screen, idx) => {
+        screen.classList.toggle('active', idx === num - 1);
+      });
+    }
+
+    function nextScreen() {
+      const activeScreen = document.querySelector('.screen.active');
+      const inputs = activeScreen.querySelectorAll('input');
+
+      for (let input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          return;
+        }
+        if (input.type === "file" && input.files.length === 0) {
+          alert("Please upload all required documents.");
+          return;
+        }
+      }
+
+      if (current < screens.length) {
+        current++;
+        showScreen(current);
+      }
+    }
+
+    function prevScreen() {
+      if (current > 1) {
+        current--;
+        showScreen(current);
+      }
+    }
+
+    document.getElementById('onboardingForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      showScreen(6);
+      setTimeout(() => this.reset(), 500);
+    });
+  </script>
+</body>
+</html>
